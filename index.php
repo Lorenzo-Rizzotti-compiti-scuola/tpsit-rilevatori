@@ -23,6 +23,12 @@ $app->addBodyParsingMiddleware();
 
 $db = (new DB())->getInstance();
 
+$app->get('/', function (Request $request, Response $response, $args){
+    $url = parse_url($request->getUri());
+
+    return $response->withStatus(302)->withHeader('Location', $url['scheme'] . '://' . $url['host'] .':8081');
+});
+
 new ImpiantoController($app);
 new RilevatoreController($app, 'umidita', "%");
 new RilevatoreController($app, 'temperatura', "°C");
