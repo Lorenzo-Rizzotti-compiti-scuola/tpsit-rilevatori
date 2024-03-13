@@ -83,8 +83,7 @@ class RilevatoreController {
         $valore_minimo = $args['valore_minimo'];
         $sql = "SELECT * FROM Misurazione WHERE rilevatore_id = ? AND valore > ?";
         $stmt = DB::getConnection()->prepare($sql);
-        $stmt->bind_param("id", $id);
-        $stmt->bind_param("d", $valore_minimo);
+        $stmt->bind_param("ii", $id, $valore_minimo);
         $stmt->execute();
         $result = $stmt->get_result();
         $misurazioni = $result->fetch_all(MYSQLI_ASSOC);
