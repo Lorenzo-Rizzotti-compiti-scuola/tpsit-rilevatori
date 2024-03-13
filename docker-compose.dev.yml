@@ -1,0 +1,28 @@
+services:
+  slim-server:
+    build:
+      context: dev
+      dockerfile: dev.Dockerfile
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "8080:80"
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: slim
+    volumes:
+      - "/var/lib/mysql"
+      - "./initdb.d:/docker-entrypoint-initdb.d/"
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./spec.yaml:/spec.yaml
+    environment:
+      SWAGGER_JSON: /spec.yaml
