@@ -12,9 +12,12 @@ class RilevatoreController {
 
     private $type;
 
-    public function __construct(App $app, $type) {
+    private $unita_di_misura;
+
+    public function __construct(App $app, $type, $unita_di_misura) {
         $this->app = $app;
         $this->type = $type;
+        $this->unita_di_misura = $unita_di_misura;
         $this->registerRoutes();
     }
 
@@ -100,9 +103,9 @@ class RilevatoreController {
 
     public function create(Request $request, Response $response, $args) {
         $data = $request->getParsedBody();
-        $sql = "INSERT INTO Rilevatore (tipo, unitaDiMisura, codiceSeriale, posizione, impianto_id) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Rilevatore (tipo, unitaDiMisura, id, posizione, impianto_id) VALUES (?, ?, ?, ?, ?)";
         $stmt = DB::getConnection()->prepare($sql);
-        $stmt->bind_param("ssssi", $this->type, $data['unitaDiMisura'], $data['codiceSeriale'], $data['posizione'], $data['impianto_id']);
+        $stmt->bind_param("ssssi", $this->type, $this->unita_di_misura, $data['codiceSeriale'], $data['posizione'], $data['impianto_id']);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
@@ -117,9 +120,9 @@ class RilevatoreController {
     public function update(Request $request, Response $response, $args) {
         $id = $args['id'];
         $data = $request->getParsedBody();
-        $sql = "UPDATE Rilevatore SET tipo = ?, unitaDiMisura = ?, codiceSeriale = ?, posizione = ?, impianto_id = ? WHERE id = ?";
+        $sql = "UPDATE Rilevatore SET posizione = ?, impianto_id = ? WHERE id = ? AND tipo = ?";
         $stmt = DB::getConnection()->prepare($sql);
-        $stmt->bind_param("ssssii", $this->type, $data['unitaDiMisura'], $data['codiceSeriale'], $data['posizione'], $data['impianto_id'], $id);
+        $stmt->bind_param("ssss", $data['posizione'], $data['impianto_id'], $id, $this->type);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {

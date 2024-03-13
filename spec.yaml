@@ -15,7 +15,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Successful operation
@@ -38,8 +38,6 @@ paths:
             schema:
               type: object
               properties:
-                unitaDiMisura:
-                  type: string
                 codiceSeriale:
                   type: string
                 posizione:
@@ -51,20 +49,6 @@ paths:
           description: Rilevatore created
         '500':
           description: Failed to create Rilevatore
-    put:
-      summary: Update a Rilevatore of type umidita
-      responses:
-        '200':
-          description: Rilevatore updated
-        '500':
-          description: Failed to update Rilevatore
-    delete:
-      summary: Delete a Rilevatore of type umidita
-      responses:
-        '200':
-          description: Rilevatore deleted
-        '500':
-          description: Failed to delete Rilevatore
   /rilevatori_di_umidita/{id}:
     get:
       summary: Get a specific Rilevatore of type umidita
@@ -73,12 +57,49 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Successful operation
         '404':
           description: Rilevatore not found
+    delete:
+      summary: Delete a specific Rilevatore of type umidita
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Rilevatore not found
+    put:
+      summary: Update a specific Rilevatore of type umidita
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                posizione:
+                  type: string
+                impianto_id:
+                  type: integer
+      responses:
+        '200':
+          description: Rilevatore updated
+        '500':
+          description: Failed to update Rilevatore
   /rilevatori_di_umidita/{id}/misurazioni:
     get:
       summary: Get all Misurazione for a specific Rilevatore
@@ -87,7 +108,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Successful operation
@@ -101,7 +122,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
         - name: valore_minimo
           in: path
           required: true
@@ -129,8 +150,6 @@ paths:
             schema:
               type: object
               properties:
-                unitaDiMisura:
-                  type: string
                 codiceSeriale:
                   type: string
                 posizione:
@@ -142,20 +161,6 @@ paths:
           description: Rilevatore created
         '500':
           description: Failed to create Rilevatore
-    put:
-      summary: Update a Rilevatore of type temperatura
-      responses:
-        '200':
-          description: Rilevatore updated
-        '500':
-          description: Failed to update Rilevatore
-    delete:
-      summary: Delete a Rilevatore of type temperatura
-      responses:
-        '200':
-          description: Rilevatore deleted
-        '500':
-          description: Failed to delete Rilevatore
   /rilevatori_di_temperatura/{id}:
     get:
       summary: Get a specific Rilevatore of type temperatura
@@ -164,12 +169,49 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Successful operation
         '404':
           description: Rilevatore not found
+    delete:
+      summary: Delete a specific Rilevatore of type temperatura
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Rilevatore not found
+    put:
+      summary: Update a specific Rilevatore of type temperatura
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                posizione:
+                  type: string
+                impianto_id:
+                  type: integer
+      responses:
+        '200':
+          description: Rilevatore updated
+        '500':
+          description: Failed to update Rilevatore
   /rilevatori_di_temperatura/{id}/misurazioni:
     get:
       summary: Get all Misurazione for a specific Rilevatore
@@ -178,7 +220,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: Successful operation
@@ -192,7 +234,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
         - name: valore_minimo
           in: path
           required: true

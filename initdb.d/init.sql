@@ -6,12 +6,10 @@ CREATE TABLE Impianto (
 );
 
 CREATE TABLE Rilevatore (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id VARCHAR(255) PRIMARY KEY,
     tipo ENUM('umidita', 'temperatura'),
     unitaDiMisura VARCHAR(10),
-    codiceSeriale VARCHAR(255),
-    posizione ENUM('terra', 'aria') NULL,
-    tipologia ENUM('acqua', 'aria') NULL,
+    posizione ENUM('terra', 'acqua', 'aria') NULL,
     impianto_id INT,
     FOREIGN KEY (impianto_id) REFERENCES Impianto(id)
 );
@@ -20,7 +18,7 @@ CREATE TABLE Misurazione (
     id INT PRIMARY KEY AUTO_INCREMENT,
     data DATETIME,
     valore DECIMAL(5,2),
-    rilevatore_id INT,
+    rilevatore_id VARCHAR(255),
     FOREIGN KEY (rilevatore_id) REFERENCES Rilevatore(id)
 );
 

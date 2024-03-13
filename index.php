@@ -24,7 +24,7 @@ $app->addBodyParsingMiddleware();
 $db = (new DB())->getInstance();
 
 new ImpiantoController($app);
-new RilevatoreController($app, 'umidita');
-new RilevatoreController($app, 'temperatura');
+new RilevatoreController($app, 'umidita', "%");
+new RilevatoreController($app, 'temperatura', "°C");
 
 $app->run();
