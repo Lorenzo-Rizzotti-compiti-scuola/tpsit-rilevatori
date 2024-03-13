@@ -6,3 +6,5 @@ RUN docker-php-ext-install mysqli
 RUN a2enmod headers
 
 COPY . /var/www/html
+
+RUN composer install

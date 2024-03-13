@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e072689f540198918ff160054b86a3ff",
+    "content-hash": "1ce40ffb24afca0432dd1099922c2490",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -814,7 +814,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-mysqli": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
